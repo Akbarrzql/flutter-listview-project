@@ -35,9 +35,8 @@ class _listviewState extends State<listview> {
   Widget avatar(int index){
     return CircleAvatar(
       radius: 24,
-      backgroundColor: Colors.lightBlue,
       child: Text(
-        data[index].kodeName.toString(),
+        data[index].kodeName,
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -50,13 +49,13 @@ class _listviewState extends State<listview> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            data[index].name.toString(),
+            data[index].name,
             style: TextStyle(fontSize: 16,
                 fontWeight: FontWeight.w600),
           ),
           Container(
             margin: EdgeInsets.only(top: 2),
-            child: Text(data[index].jurusan.toString()),
+            child: Text(data[index].jurusan),
           ),
         ],
       ),
