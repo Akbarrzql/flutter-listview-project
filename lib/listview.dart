@@ -62,22 +62,37 @@ class _listviewState extends State<listview> {
     ));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Listview"),),
+      // appBar: AppBar(title: Text("Listview"),),
       body: ListView.builder(
         padding: EdgeInsets.all(5),
         itemCount: data.length,
         itemBuilder: (buildContext, index) {
           return GestureDetector(
-            onTap: (){
-              //snackbar
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("${data[index].name}"),
-                  duration: Duration(seconds: 2),
-                ));
-            },
+            onTap: () => showDialog(context: context, builder: (BuildContext context)=> AlertDialog(
+              title: Text("Hapus Kontak"),
+              content: Text("Anda yakin ingin menghapus kontak ${data[index].name}?"),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text("Ya"),
+                  onPressed: (){
+                    setState(() {
+                      data.removeAt(index);
+                    });
+                    Navigator.pop(context);
+                  },
+                ),
+                FlatButton(
+                  child: Text("Tidak"),
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            )),
             child: Container(
               margin: EdgeInsets.all(10),
               child: Row(
