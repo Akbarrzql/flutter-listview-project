@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:listview_project/API/ListAllFootbal.dart';
 import 'package:listview_project/listview.dart';
 
 class Tabs extends StatefulWidget {
@@ -15,7 +16,7 @@ class _TabsState extends State<Tabs> with SingleTickerProviderStateMixin {
 
   List<Widget> list = [
     Tab(icon: Icon(Icons.contact_phone)),
-    Tab(icon: Icon(Icons.auto_mode)),
+    Tab(icon: Icon(Icons.sports_baseball)),
     Tab(icon: Icon(Icons.person_outline)),
   ];
 
@@ -51,7 +52,7 @@ class _TabsState extends State<Tabs> with SingleTickerProviderStateMixin {
          controller: _controller,
           children: [
             listview(),
-            Center(child: Text("Tab 2")),
+            ListAllFootball(),
             Center(child: Text("Tab 3")),
           ],
         ),
