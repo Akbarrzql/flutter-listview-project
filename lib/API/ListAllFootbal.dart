@@ -40,6 +40,7 @@ class _ListAllFootballState extends State<ListAllFootball> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF222222),
       body: Center(
         child: Container(
           child: isLoading ? ListView.builder(
@@ -53,22 +54,26 @@ class _ListAllFootballState extends State<ListAllFootball> {
                   )));
                 },
                 child: Card(
+                  color: Color(0xFF353535),
                   margin: EdgeInsets.all(5),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Image.network(spanyolModel!.teams![index].strTeamBadge.toString(), width: 50, height: 50, ),
-                      Container(
-                        margin: EdgeInsets.only(left: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(spanyolModel!.teams![index].strTeam.toString(), style: TextStyle(fontSize: 20),),
-                            Text(spanyolModel!.teams![index].strLeague.toString(), style: TextStyle(fontSize: 15),),
-                          ],
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Image.network(spanyolModel!.teams![index].strTeamBadge.toString(), width: 50, height: 50, ),
+                        Container(
+                          margin: EdgeInsets.only(left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(spanyolModel!.teams![index].strTeam.toString(), style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
+                              Text(spanyolModel!.teams![index].strLeague.toString(), style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal, color: Colors.white),),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 )
               );
