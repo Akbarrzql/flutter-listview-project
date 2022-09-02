@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listview_project/API/ListAllFootbal.dart';
+import 'package:listview_project/APISports/ListAllFootbal.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'SpanyolModel.dart';

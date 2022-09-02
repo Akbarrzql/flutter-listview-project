@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:listview_project/API/SpanyolModel.dart';
+import 'package:listview_project/APISports/SpanyolModel.dart';
 import 'dart:convert';
 import 'package:http/http.dart'as http;
 
