@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'DetailHeadlines.dart';
+import '../DetailHeadlines.dart';
 
-class HeadlinesPages extends StatefulWidget {
-  const HeadlinesPages({Key? key}) : super(key: key);
+class Sports extends StatefulWidget {
+  const Sports({Key? key}) : super(key: key);
 
   @override
-  State<HeadlinesPages> createState() => _HeadlinesPagesState();
+  State<Sports> createState() => _SportsState();
 }
 
-class _HeadlinesPagesState extends State<HeadlinesPages> {
+class _SportsState extends State<Sports> {
 
   bool loading = false;
   List _get = [];
   final date = new DateFormat('d MMMM y hh:mm');
-
 
   @override
   void initState() {
@@ -29,6 +28,19 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        title: Text(
+          'Olah Raga',
+          style: TextStyle(
+            fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.bold)).fontFamily,
+            color: Colors.black
+          ),
+        ),
+      ),
       body: loading ? ListView.builder(
         itemCount: _get.length,
         itemBuilder: (context, index) {
@@ -51,7 +63,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   padding: EdgeInsets.all(10),
                   //image
                   child: Image.network(
-                    _get[index]['urlToImage'].toString() ,
+                    _get[index]['urlToImage'].toString() ?? '',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -59,7 +71,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   padding: EdgeInsets.only(top: 5, left: 10, right: 10),
                   //title
                   child: Text(
-                    _get[index]['title'].toString(),
+                    _get[index]['title'].toString() ?? '',
                     style: TextStyle(
                       fontSize: 23,
                       fontFamily: GoogleFonts.ptSerif(color: Colors.black, fontWeight: FontWeight.bold).fontFamily,),
@@ -69,7 +81,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   padding: EdgeInsets.only(top: 5, left: 10, right: 10,bottom: 10),
                   //description
                   child: Text(
-                    _get[index]['description'].toString(),
+                    _get[index]['description'].toString() ?? '',
                     style: TextStyle(
                         fontSize: 15,
                         color: Colors.black54),
@@ -108,7 +120,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
     });
     try {
       final response = await http.get(Uri.parse(
-          "https://newsapi.org/v2/top-headlines?country=id&apiKey=89bdbcf124124d558e1e06af6c91faae"));
+          "https://newsapi.org/v2/top-headlines?country=id&category=sports&apiKey=89bdbcf124124d558e1e06af6c91faae"));
       // return jsonDecode(response.body);
 
       // untuk cek data
@@ -124,5 +136,4 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
       print(e);
     }
   }
-
 }

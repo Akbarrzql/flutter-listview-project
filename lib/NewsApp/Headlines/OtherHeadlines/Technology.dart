@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'DetailHeadlines.dart';
+import '../DetailHeadlines.dart';
 
-class HeadlinesPages extends StatefulWidget {
-  const HeadlinesPages({Key? key}) : super(key: key);
+class Technology extends StatefulWidget {
+  const Technology({Key? key}) : super(key: key);
 
   @override
-  State<HeadlinesPages> createState() => _HeadlinesPagesState();
+  State<Technology> createState() => _TechnologyState();
 }
 
-class _HeadlinesPagesState extends State<HeadlinesPages> {
+class _TechnologyState extends State<Technology> {
 
   bool loading = false;
   List _get = [];
   final date = new DateFormat('d MMMM y hh:mm');
-
 
   @override
   void initState() {
@@ -26,9 +25,23 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
     _getData();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        title: Text(
+          'Teknologi',
+          style: TextStyle(
+              fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.bold)).fontFamily,
+              color: Colors.black
+          ),
+        ),
+      ),
       body: loading ? ListView.builder(
         itemCount: _get.length,
         itemBuilder: (context, index) {
@@ -51,7 +64,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   padding: EdgeInsets.all(10),
                   //image
                   child: Image.network(
-                    _get[index]['urlToImage'].toString() ,
+                    _get[index]['urlToImage'].toString(),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -98,7 +111,6 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
       ) : Center(
         child: CircularProgressIndicator(),
       ),
-
     );
   }
 
@@ -108,7 +120,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
     });
     try {
       final response = await http.get(Uri.parse(
-          "https://newsapi.org/v2/top-headlines?country=id&apiKey=89bdbcf124124d558e1e06af6c91faae"));
+          "https://newsapi.org/v2/top-headlines?country=id&category=technology&apiKey=89bdbcf124124d558e1e06af6c91faae"));
       // return jsonDecode(response.body);
 
       // untuk cek data
@@ -124,5 +136,4 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
       print(e);
     }
   }
-
 }

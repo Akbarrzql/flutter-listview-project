@@ -1,57 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-import 'DetailHeadlines.dart';
+import 'dart:convert';
 
-class HeadlinesPages extends StatefulWidget {
-  const HeadlinesPages({Key? key}) : super(key: key);
+import 'package:listview_project/NewsApp/APIArticleNyt/Model/MovieNytModel.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/DetailNytArticle.dart';
+
+class WorldNytArticle extends StatefulWidget {
+  const WorldNytArticle({Key? key}) : super(key: key);
 
   @override
-  State<HeadlinesPages> createState() => _HeadlinesPagesState();
+  State<WorldNytArticle> createState() => _WorldNytArticleState();
 }
 
-class _HeadlinesPagesState extends State<HeadlinesPages> {
+class _WorldNytArticleState extends State<WorldNytArticle> {
 
-  bool loading = false;
-  List _get = [];
-  final date = new DateFormat('d MMMM y hh:mm');
+  BookNytModel? bookNytModel;
+  bool loading = true;
 
+  void getAllWorld() async {
+    setState(() {
+      loading = false;
+    });
+    final res = await http.get(Uri.parse("https://api.nytimes.com/svc/topstories/v2/world.json?api-key=VAGioGV72XjabZyJsHSbThL3m0ha5QIk"));
+    print("Response status: ${res.statusCode}");
+    bookNytModel = BookNytModel.fromJson(json.decode(res.body.toString()));
+    print("article 0 : " + bookNytModel!.results![0].title.toString());
+    setState(() {
+      loading = true;
+    });
+  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getData();
+    getAllWorld();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        title: Text(
+          'World',
+          style: TextStyle(
+              fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.bold)).fontFamily,
+              color: Colors.black
+          ),
+        ),
+      ),
       body: loading ? ListView.builder(
-        itemCount: _get.length,
+        itemCount: bookNytModel!.results!.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DetailHeadlines(
-                    title: _get[index]['title'],
-                    url: _get[index]['url'],
+                  builder: (context) => DetailNytListArticle(
+                    results: bookNytModel!.results![index],
                   ),
                 ),
               );
             },
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.all(10),
                   //image
                   child: Image.network(
-                    _get[index]['urlToImage'].toString() ,
+                    bookNytModel!.results![index].multimedia![0].url.toString(),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -59,7 +82,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   padding: EdgeInsets.only(top: 5, left: 10, right: 10),
                   //title
                   child: Text(
-                    _get[index]['title'].toString(),
+                    bookNytModel!.results![index].title.toString(),
                     style: TextStyle(
                       fontSize: 23,
                       fontFamily: GoogleFonts.ptSerif(color: Colors.black, fontWeight: FontWeight.bold).fontFamily,),
@@ -69,19 +92,9 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   padding: EdgeInsets.only(top: 5, left: 10, right: 10,bottom: 10),
                   //description
                   child: Text(
-                    _get[index]['description'].toString(),
+                    bookNytModel!.results![index].abstract.toString(),
                     style: TextStyle(
                         fontSize: 15,
-                        color: Colors.black54),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(top: 5, left: 10),
-                  //dateFormated and time hour ago
-                  child: Text(
-                    date.format(DateTime.parse(_get[index]['publishedAt'].toString())),
-                    style: TextStyle(
-                        fontSize: 13,
                         color: Colors.black54),
                   ),
                 ),
@@ -98,31 +111,6 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
       ) : Center(
         child: CircularProgressIndicator(),
       ),
-
     );
   }
-
-  Future _getData() async {
-    setState(() {
-      loading = false;
-    });
-    try {
-      final response = await http.get(Uri.parse(
-          "https://newsapi.org/v2/top-headlines?country=id&apiKey=89bdbcf124124d558e1e06af6c91faae"));
-      // return jsonDecode(response.body);
-
-      // untuk cek data
-      if (response.statusCode == 200) {
-        print(response.body);
-        final data = jsonDecode(response.body);
-        setState(() {
-          _get = data['articles'];
-          loading = true;
-        });
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
 }

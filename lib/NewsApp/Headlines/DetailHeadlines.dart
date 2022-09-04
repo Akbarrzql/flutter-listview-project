@@ -15,8 +15,13 @@ class DetailHeadlines extends StatefulWidget {
 
 class _DetailHeadlinesState extends State<DetailHeadlines> {
 
+  bool loading = false;
+
   @override
   void initState() {
+    setState(() {
+      loading = true;
+    });
     // TODO: implement initState
     super.initState();
     if (Platform.isAndroid) WebView.platform = AndroidWebView();
@@ -34,11 +39,12 @@ class _DetailHeadlinesState extends State<DetailHeadlines> {
           ),),),
         backgroundColor: Colors.white,
       ),
-      body: (
-      WebView(
+      body: loading ? WebView(
         initialUrl: widget.url,
-      )
-      )
+        javascriptMode: JavascriptMode.unrestricted,
+      ) : Center(
+        child: CircularProgressIndicator(),
+        ),
     );
   }
 }

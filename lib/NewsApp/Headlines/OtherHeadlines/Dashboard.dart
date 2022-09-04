@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/ListMovieNyt.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/WorldNytArticle.dart';
+import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Business.dart';
+import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Entertaiment.dart';
+import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Health.dart';
+import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Sains.dart';
+import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Sports.dart';
+import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Technology.dart';
 import 'package:listview_project/listview.dart';
 
 class DashboardNews extends StatefulWidget {
@@ -18,9 +26,10 @@ class _DashboardNewsState extends State<DashboardNews> {
         padding: EdgeInsets.all(15),
         children: [InkWell(
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('World '),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WorldNytArticle(),
               ),
             );
           },
@@ -28,11 +37,11 @@ class _DashboardNewsState extends State<DashboardNews> {
             padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
             child: Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.public,
                     color: Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Text(
@@ -46,11 +55,13 @@ class _DashboardNewsState extends State<DashboardNews> {
             ),
           ),
         ),
+
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Bisnis'),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Business(),
                 ),
               );
             },
@@ -58,11 +69,11 @@ class _DashboardNewsState extends State<DashboardNews> {
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.business,
                     color: Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Text(
@@ -78,9 +89,10 @@ class _DashboardNewsState extends State<DashboardNews> {
           ),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Enterainment'),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Entertaiment(),
                 ),
               );
             },
@@ -88,11 +100,11 @@ class _DashboardNewsState extends State<DashboardNews> {
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.movie,
                     color: Colors.black,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Text(
@@ -108,9 +120,10 @@ class _DashboardNewsState extends State<DashboardNews> {
           ),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Sains'),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Sains(),
                 ),
               );
             },
@@ -118,11 +131,11 @@ class _DashboardNewsState extends State<DashboardNews> {
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                   children: <Widget>[
-                    Icon(
+                    const Icon(
                       Icons.biotech,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(
@@ -138,9 +151,10 @@ class _DashboardNewsState extends State<DashboardNews> {
           ),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Kesehatan'),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Health(),
                 ),
               );
             },
@@ -148,11 +162,11 @@ class _DashboardNewsState extends State<DashboardNews> {
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                   children: <Widget>[
-                    Icon(
+                    const Icon(
                       Icons.health_and_safety,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(
@@ -168,21 +182,19 @@ class _DashboardNewsState extends State<DashboardNews> {
           ),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Olah Raga'),
-                ),
-              );
+              setState(() {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Sports()));
+              });
             },
             child: Container(
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                   children: <Widget>[
-                    Icon(
+                    const Icon(
                       Icons.sports_baseball,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(
@@ -198,9 +210,10 @@ class _DashboardNewsState extends State<DashboardNews> {
           ),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Teknologi'),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Technology(),
                 ),
               );
             },
@@ -208,11 +221,11 @@ class _DashboardNewsState extends State<DashboardNews> {
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                   children: <Widget>[
-                    Icon(
+                    const Icon(
                       Icons.developer_board,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(
@@ -228,9 +241,10 @@ class _DashboardNewsState extends State<DashboardNews> {
           ),
           InkWell(
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Buku'),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListBookNyt(),
                 ),
               );
             },
@@ -238,45 +252,15 @@ class _DashboardNewsState extends State<DashboardNews> {
               padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
               child: Row(
                   children: <Widget>[
-                    Icon(
-                      Icons.book,
+                    const Icon(
+                      Icons.movie,
                       color: Colors.black,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(
-                      'Buku',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.w500)).fontFamily,
-                      ),
-                    ),
-                  ]
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Magazine'),
-                ),
-              );
-            },
-            child: Container(
-              padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
-              child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.menu_book,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      'Magazine',
+                      'Film',
                       style: TextStyle(
                         fontSize: 18,
                         fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.w500)).fontFamily,

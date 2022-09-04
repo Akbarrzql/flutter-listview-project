@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:listview_project/NewsApp/MainPage/Home.dart';
+import 'package:listview_project/NewsApp/MainPage/SplashScreen.dart';
+import 'package:listview_project/Tabs.dart';
 
 
 void main() {
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blueGrey,
       ),
-      home: const HomeNews(),
+      home: const SplashScreen(),
       //disable debug banner
       debugShowCheckedModeBanner: false,
     );
