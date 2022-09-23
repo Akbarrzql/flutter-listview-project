@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shimmer/shimmer.dart';
 import 'dart:convert';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -125,9 +126,133 @@ class _CovidListState extends State<CovidList> {
               ),
             );
           },
-        ) : Center(child: CircularProgressIndicator(),),
-      ),
-    );
+        ) : Center(child: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Card(
+                color: Color(0xFF2e343b),
+                elevation: 5,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      //image
+                      child: Text(
+                        "Loading...",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: GoogleFonts
+                              .ptSerif()
+                              .fontFamily,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      height: 10,
+                      indent: 10,
+                      endIndent: 10,
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 15),
+                        child: Column(
+                            children: <Widget>[
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text("Terkonfirmasi ",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,),),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text("Loading...", style: TextStyle(
+                                            color: Colors.yellow,
+                                            fontSize: 14,))
+                                        ],
+                                      ),
+                                      color: Colors.white,
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .center,
+                                        children: <Widget>[
+                                          Container(
+                                            margin: EdgeInsets.only(left: 58),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text("Sembuh", style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,),),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text("Loading...",
+                                                    style: TextStyle(
+                                                      color: Colors.green,
+                                                      fontSize: 14,))
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      color: Colors.white,
+                                    ),
+                                    Container(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .end,
+                                        children: <Widget>[
+                                          Container(
+                                            margin: EdgeInsets.only(left: 66),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text("Meninggal",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,),),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text("Loading...",
+                                                    style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 14,))
+                                              ],
+                                            ),
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+        ),
+        ),
+        ),
+        ),
+        );
   }
 
 

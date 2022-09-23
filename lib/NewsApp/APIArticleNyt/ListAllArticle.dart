@@ -48,10 +48,6 @@ class _ListAllArticleState extends State<ListAllArticle> {
               return GestureDetector(
                 onTap: () {
                   setState(() {
-                    //snackbar
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text(modelSportsNyt!.results![index].title.toString()),
-                    ));
                   });
                 },
                 child: Card(

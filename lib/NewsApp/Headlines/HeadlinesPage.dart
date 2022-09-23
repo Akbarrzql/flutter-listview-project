@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -16,7 +17,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
 
   bool loading = false;
   List _get = [];
-  final date = new DateFormat('d MMMM y hh:mm');
+  final date = DateFormat('d MMMM y hh:mm');
 
 
   @override
@@ -48,7 +49,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   //image
                   child: Image.network(
                     _get[index]['urlToImage'].toString() ,
@@ -56,7 +57,7 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                  padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                   //title
                   child: Text(
                     _get[index]['title'].toString(),
@@ -96,9 +97,63 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
           );
         },
       ) : Center(
-        child: CircularProgressIndicator(),
+        child: Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    //image
+                    child: Container(
+                      width: double.infinity,
+                      height: 200,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 5, left: 10, right: 10),
+                    //title
+                    child: Container(
+                      width: double.infinity,
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 5, left: 10, right: 10,bottom: 10),
+                    //description
+                    child: Container(
+                      width: double.infinity,
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 5, left: 10),
+                    //dateFormated and time hour ago
+                    child: Container(
+                      width: double.infinity,
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                    height: 10,
+                    indent: 13,
+                    endIndent: 13,
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
       ),
-
     );
   }
 
@@ -126,3 +181,5 @@ class _HeadlinesPagesState extends State<HeadlinesPages> {
   }
 
 }
+
+

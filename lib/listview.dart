@@ -76,7 +76,7 @@ class _listviewState extends State<listview> {
               title: Text("Hapus Kontak"),
               content: Text("Anda yakin ingin menghapus kontak ${data[index].name}?"),
               actions: <Widget>[
-                FlatButton(
+                ElevatedButton(
                   child: Text("Ya"),
                   onPressed: (){
                     setState(() {
@@ -85,7 +85,7 @@ class _listviewState extends State<listview> {
                     Navigator.pop(context);
                   },
                 ),
-                FlatButton(
+                ElevatedButton(
                   child: Text("Tidak"),
                   onPressed: (){
                     Navigator.pop(context);
