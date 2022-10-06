@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/Model/WorldNytModel.dart';
 import 'package:listview_project/NewsApp/CovidPage/CovidList.dart';
-import 'package:listview_project/NewsApp/Headlines/HeadlinesPage.dart';
 import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Dashboard.dart';
-
-import '../APIArticleNyt/ListAllArticle.dart';
+import '../APIArticleNyt/NytArticel/WorldNytArticle.dart';
 
 class HomeNews extends StatefulWidget {
   const HomeNews({Key? key}) : super(key: key);
@@ -15,6 +14,7 @@ class HomeNews extends StatefulWidget {
 
 class _HomeNewsState extends State<HomeNews> {
 
+  BookNytModel? bookNytModel;
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
@@ -23,7 +23,7 @@ class _HomeNewsState extends State<HomeNews> {
   }
 
   static const List<Widget> _pages = <Widget>[
-    HeadlinesPages(),
+    WorldNytArticle(),
     CovidList(),
     DashboardNews(),
   ];

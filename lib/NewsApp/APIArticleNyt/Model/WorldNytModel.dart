@@ -1,3 +1,5 @@
+import 'package:listview_project/NewsApp/APIArticleNyt/Model/ModelSportsNyt.dart';
+
 class BookNytModel {
   String? status;
   String? copyright;
@@ -40,6 +42,7 @@ class BookNytModel {
     }
     return data;
   }
+
 }
 
 class Results {
@@ -60,7 +63,7 @@ class Results {
   List<String>? orgFacet;
   List<String>? perFacet;
   List<String>? geoFacet;
-  List<Multimedia>? multimedia;
+  String? imageurl;
   String? shortUrl;
 
   Results(
@@ -81,8 +84,17 @@ class Results {
         this.orgFacet,
         this.perFacet,
         this.geoFacet,
-        this.multimedia,
+        this.imageurl,
         this.shortUrl});
+
+  Map<String, dynamic> toMap(){
+    return {
+      'title': title,
+      'abstract': abstract,
+      'url' : url,
+      'multimedia' : imageurl,
+    };
+  }
 
   Results.fromJson(Map<String, dynamic> json) {
     section = json['section'];
@@ -102,12 +114,7 @@ class Results {
     orgFacet = json['org_facet'].cast<String>();
     perFacet = json['per_facet'].cast<String>();
     geoFacet = json['geo_facet'].cast<String>();
-    if (json['multimedia'] != null) {
-      multimedia = <Multimedia>[];
-      json['multimedia'].forEach((v) {
-        multimedia!.add(new Multimedia.fromJson(v));
-      });
-    }
+    imageurl = json['multimedia'][0]['url'];
     shortUrl = json['short_url'];
   }
 
@@ -130,9 +137,7 @@ class Results {
     data['org_facet'] = this.orgFacet;
     data['per_facet'] = this.perFacet;
     data['geo_facet'] = this.geoFacet;
-    if (this.multimedia != null) {
-      data['multimedia'] = this.multimedia!.map((v) => v.toJson()).toList();
-    }
+    data['multimedia'][0]['url'] = this.imageurl;
     data['short_url'] = this.shortUrl;
     return data;
   }
@@ -148,15 +153,14 @@ class Multimedia {
   String? caption;
   String? copyright;
 
-  Multimedia(
-      {this.url,
-        this.format,
-        this.height,
-        this.width,
-        this.type,
-        this.subtype,
-        this.caption,
-        this.copyright});
+  Multimedia({this.url,
+    this.format,
+    this.height,
+    this.width,
+    this.type,
+    this.subtype,
+    this.caption,
+    this.copyright});
 
   Multimedia.fromJson(Map<String, dynamic> json) {
     url = json['url'];
@@ -180,5 +184,11 @@ class Multimedia {
     data['caption'] = this.caption;
     data['copyright'] = this.copyright;
     return data;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'url': url,
+    };
   }
 }

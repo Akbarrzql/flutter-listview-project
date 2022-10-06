@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import 'package:listview_project/NewsApp/APIArticleNyt/Model/MovieNytModel.dart';
+import 'package:path/path.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/Model/WorldNytModel.dart';
 import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/DetailNytArticle.dart';
+import 'package:sqflite/sqflite.dart';
 
 class WorldNytArticle extends StatefulWidget {
   const WorldNytArticle({Key? key}) : super(key: key);
@@ -31,6 +32,8 @@ class _WorldNytArticleState extends State<WorldNytArticle> {
     });
   }
 
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -38,22 +41,24 @@ class _WorldNytArticleState extends State<WorldNytArticle> {
     getAllWorld();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
-        title: Text(
-          'World',
-          style: TextStyle(
-              fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.bold)).fontFamily,
-              color: Colors.black
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   iconTheme: IconThemeData(
+      //     color: Colors.black,
+      //   ),
+      //   title: Text(
+      //     'World',
+      //     style: TextStyle(
+      //         fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.bold)).fontFamily,
+      //         color: Colors.black
+      //     ),
+      //   ),
+      // ),
       body: loading ? ListView.builder(
         itemCount: bookNytModel!.results!.length,
         itemBuilder: (context, index) {
@@ -74,7 +79,7 @@ class _WorldNytArticleState extends State<WorldNytArticle> {
                   padding: EdgeInsets.all(10),
                   //image
                   child: Image.network(
-                    bookNytModel!.results![index].multimedia![0].url.toString(),
+                    bookNytModel!.results![index].imageurl!.toString(),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -113,4 +118,5 @@ class _WorldNytArticleState extends State<WorldNytArticle> {
       ),
     );
   }
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/FavoritsNytArticle.dart';
 import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/ListMovieNyt.dart';
 import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/WorldNytArticle.dart';
 import 'package:listview_project/NewsApp/Headlines/OtherHeadlines/Business.dart';
@@ -261,6 +262,37 @@ class _DashboardNewsState extends State<DashboardNews> {
                     ),
                     Text(
                       'Film',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.w500)).fontFamily,
+                      ),
+                    ),
+                  ]
+              ),
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FavoritsNytArticle(),
+                ),
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.only(top: 10, bottom: 10, left: 5),
+              child: Row(
+                  children: <Widget>[
+                    const Icon(
+                      Icons.star,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Favorite',
                       style: TextStyle(
                         fontSize: 18,
                         fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.w500)).fontFamily,

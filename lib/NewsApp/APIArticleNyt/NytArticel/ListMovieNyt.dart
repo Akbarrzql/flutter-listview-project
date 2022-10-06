@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:listview_project/NewsApp/APIArticleNyt/NytArticel/DetailNytArticle.dart';
 import 'dart:convert';
 
-import 'package:listview_project/NewsApp/APIArticleNyt/Model/MovieNytModel.dart';
+import 'package:listview_project/NewsApp/APIArticleNyt/Model/WorldNytModel.dart';
 
 class ListBookNyt extends StatefulWidget {
   const ListBookNyt({Key? key}) : super(key: key);
@@ -79,7 +79,7 @@ class _ListBookNytState extends State<ListBookNyt> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
-                              image: NetworkImage(bookNytModel!.results![index].multimedia![0].url.toString()),
+                              image: NetworkImage(bookNytModel!.results![index].imageurl.toString()),
                               fit: BoxFit.cover,
                             ),
                           ),

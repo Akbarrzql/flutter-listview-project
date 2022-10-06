@@ -16,6 +16,9 @@ class DetailHeadlines extends StatefulWidget {
 class _DetailHeadlinesState extends State<DetailHeadlines> {
 
   bool loading = false;
+  static const List<String> choices = <String>[
+    "Favorite"
+  ];
 
   @override
   void initState() {
@@ -38,6 +41,21 @@ class _DetailHeadlinesState extends State<DetailHeadlines> {
             color: Colors.black,
           ),),),
         backgroundColor: Colors.white,
+        actions: <Widget>[
+        PopupMenuButton(
+        onSelected: _select,
+        padding: EdgeInsets.zero,
+        // initialValue: choices[_selection],
+        itemBuilder: (BuildContext context) {
+          return choices.map((String choice) {
+            return  PopupMenuItem<String>(
+              value: choice,
+              child: Text(choice),
+            );}
+          ).toList();
+        },
+      ),
+      ],
       ),
       body: loading ? WebView(
         initialUrl: widget.url,
@@ -46,5 +64,15 @@ class _DetailHeadlinesState extends State<DetailHeadlines> {
         child: CircularProgressIndicator(),
         ),
     );
+  }
+
+  void _select(String value) {
+    switch (value) {
+      case "Favorite":
+        setState(() {
+
+        });
+        break;
+    }
   }
 }

@@ -42,7 +42,7 @@ class _MainHomeState extends State<MainHome> {
                   content: Text('query all rows: $queryRows'),
                 ),
               );
-            }, child: Text('query')),
+            }, child: const Text('query')),
             ElevatedButton(onPressed: () async{
               int updateId = await DatabaseHelper.instance.update({
                 DatabaseHelper.columnId: 1,

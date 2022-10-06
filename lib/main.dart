@@ -3,6 +3,7 @@ import 'package:listview_project/NewsApp/MainPage/Home.dart';
 import 'package:listview_project/NewsApp/MainPage/SplashScreen.dart';
 import 'package:listview_project/Tabs.dart';
 
+import 'NewsApp/Headlines/HeadlinesPage.dart';
 import 'Sqflite/MainHome.dart';
 
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blueGrey,
       ),
-      home: const MainHome(),
+      home: const HomeNews(),
       //disable debug banner
       debugShowCheckedModeBanner: false,
     );
