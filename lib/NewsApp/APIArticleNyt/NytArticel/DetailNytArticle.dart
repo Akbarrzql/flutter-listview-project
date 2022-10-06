@@ -16,6 +16,7 @@ class DetailNytListArticle extends StatefulWidget {
 class _DetailNytListArticleState extends State<DetailNytListArticle> {
 
   var database;
+  bool isFavorit = false;
 
   static const List<String> choices = <String>[
     "Favorite"
@@ -38,6 +39,10 @@ class _DetailNytListArticleState extends State<DetailNytListArticle> {
       },
       version: 1,
     );
+    isFavorit = await readNyt(widget.results.title);
+    setState(() {
+
+    });
   }
 
 Future<void> insertResults(Results results) async {
@@ -47,6 +52,31 @@ Future<void> insertResults(Results results) async {
       results.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    setState(() {
+      isFavorit = true;
+    });
+  }
+  
+  Future<void> deleteNyt(Results? results) async {
+    final db = await database;
+    await db.delete(
+      'nyt',
+      where: "title = ?",
+      whereArgs: [results!.title],
+    );
+    setState(() {
+      isFavorit = false;
+    });
+  }
+  
+  Future<bool> readNyt(String? title) async {
+    final Database db = await database;
+    final data = await db.query('nyt', where: "title = ?", whereArgs: [title]);
+    if (data.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override
@@ -55,10 +85,13 @@ Future<void> insertResults(Results results) async {
       appBar: AppBar(
         actions: [
           IconButton(onPressed: (){
-            insertResults(widget.results);
-          }, icon: const Icon(Icons.favorite, color: Colors.black,)),
+            isFavorit ? deleteNyt(widget.results) : insertResults(widget.results);
+          }, icon: isFavorit ? Icon(Icons.favorite, color: Colors.black,) : Icon(Icons.favorite_border, color: Colors.black,)),
         ],
         centerTitle: true ,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
         title:  Text("Besito Times",
           style: GoogleFonts.unifrakturMaguntia(textStyle: TextStyle(
             fontSize: 20,

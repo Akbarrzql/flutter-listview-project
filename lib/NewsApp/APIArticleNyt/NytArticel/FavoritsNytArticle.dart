@@ -69,14 +69,24 @@ class _FavoritsNytArticleState extends State<FavoritsNytArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Favorits"),
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        title: Text(
+          'Favorits',
+          style: TextStyle(
+              fontFamily: GoogleFonts.ptSerif(textStyle: TextStyle(fontWeight: FontWeight.bold)).fontFamily,
+              color: Colors.black
+          ),
+        ),
       ),
       body: ListView.builder(
               itemCount: results.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: (){
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailNytListArticle(results: results[index],))).then((value) => initDB());
                   },
                   child: Column(
                     children: <Widget>[

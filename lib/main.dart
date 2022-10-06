@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blueGrey,
       ),
-      home: const HomeNews(),
+      home: const SplashScreen(),
       //disable debug banner
       debugShowCheckedModeBanner: false,
     );
